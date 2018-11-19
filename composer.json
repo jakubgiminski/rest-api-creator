@@ -1,0 +1,10 @@
+{
+    "name": "jakubgiminski/rest-api-creator",
+    "authors": [
+        {
+            "name": "Jakub Giminski",
+            "email": "jakubgiminski@gmail.com"
+        }
+    ],
+    "require": {}
+}
