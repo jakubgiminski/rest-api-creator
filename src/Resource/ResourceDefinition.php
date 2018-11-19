@@ -17,18 +17,23 @@ class ResourceDefinition implements Serializable
 
     private $parent;
 
-    public function __construct(
+    protected function __construct(
         Urid $urid,
         string $name,
         string $description,
         PropertyDefinitionCollection $propertiesDefinitions,
-        ResourceParent $parent
+        ResourceParent $parent = null
     ) {
         $this->urid = $urid;
         $this->name = $name;
         $this->description = $description;
         $this->propertiesDefinitions = $propertiesDefinitions;
         $this->parent = $parent;
+    }
+
+    public function validateProperties(PropertyCollection $properties): void
+    {
+        // @todo
     }
 
     public function serialize(Serializer $serializer)
@@ -38,7 +43,37 @@ class ResourceDefinition implements Serializable
             'name' => $this->name,
             'description' => $this->description,
             'properties_definitions' => $this->propertiesDefinitions->serialize($serializer),
-            'parent' => $this->parent->serialize($serializer),
+            'parent' => $this->hasParent() ? $this->parent->serialize($serializer) : null,
         ]);
+    }
+
+    public function getUrid(): Urid
+    {
+        return $this->urid;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getPropertiesDefinitions(): PropertyDefinitionCollection
+    {
+        return $this->propertiesDefinitions;
+    }
+
+    public function hasParent(): bool
+    {
+        return $this->parent !== null;
+    }
+
+    public function getParent(): ResourceParent
+    {
+        return $this->parent;
     }
 }
