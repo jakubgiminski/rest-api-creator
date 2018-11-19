@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Serialization;
+namespace RestApiCreator\Serialization;
 
 interface Serializable
 {
